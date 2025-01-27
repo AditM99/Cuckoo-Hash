@@ -52,7 +52,7 @@ class CuckooHash:
     def lookup(self, key: int) -> bool:
         index_0 = self.hash_func(key, 0)
         index_1 = self.hash_func(key, 1)
-        if self.tables[0][index_0] == key or self.tables[1][index_1]:
+        if self.tables[0][index_0] == key or self.tables[1][index_1] == key:
             return True
         return False
 
