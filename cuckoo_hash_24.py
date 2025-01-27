@@ -96,10 +96,11 @@ class CuckooHash24:
         old_tables = self.tables
         self.tables = [[None]*self.table_size for _ in range(2)]
         for table in old_tables:
-            for list in table:
-                for key in list:
-                    if key is not None:
-                        self.insert(key)
+            for bucket in table:
+                if bucket is not None:
+                    for key in bucket:
+                        if key is not None:
+                            self.insert(key)
 
     def check_length(self, tableID: int, index: int) -> int:
         if self.tables[tableID][index] == None:
