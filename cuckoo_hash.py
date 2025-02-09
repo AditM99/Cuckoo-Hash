@@ -23,7 +23,6 @@ class CuckooHash:
     # you may however define additional instance variables inside the __init__ method.
 
     def insert(self, key: int) -> bool:
-        key_count = dict()
         num_cycles = 0
         current_table = 0
         while num_cycles <= self.CYCLE_THRESHOLD:
@@ -31,14 +30,8 @@ class CuckooHash:
             if self.tables[current_table][index] is None:
                 self.tables[current_table][index] = key
                 return True
-            
-            if key not in key_count:
-                key_count[key] = 0
-            key_count[key]+=1
-
-            if key_count[key] > self.CYCLE_THRESHOLD:
+            if num_cycles > self.CYCLE_THRESHOLD:
                 return False
-
             temp = self.tables[current_table][index]
             self.tables[current_table][index] = key
             key = temp
@@ -81,5 +74,3 @@ class CuckooHash:
     # feel free to define new methods in addition to the above
     # fill in the definitions of each required member function (above),
     # and for any additional member functions you define
-
-
